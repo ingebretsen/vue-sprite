@@ -9,6 +9,12 @@
       :frame-sources="frameSources"
       :frame-index="frameIndex"
     />
+    <div
+      class="app__scroll-progress"
+      :style="{ top: 5 + progress * 90 + 'vh' }"
+    >
+      {{ (progress * 100).toFixed(2) }}%
+    </div>
   </div>
 </template>
 
@@ -35,6 +41,7 @@ export default {
   data() {
     return {
       frameIndex: 0,
+      progress: 0,
     };
   },
   computed: {
@@ -44,6 +51,7 @@ export default {
   },
   methods: {
     onScrollProgress(p) {
+      this.progress = p;
       this.frameIndex = Math.round(p * (this.frameSources.length - 1));
     },
   },
@@ -55,6 +63,7 @@ body,
 html {
   margin: 0;
   padding: 0;
+  background-color: #46494e;
 }
 .app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -65,7 +74,6 @@ html {
   color: #2c3e50;
 
   &__sprite {
-    border: 1px solid black;
     box-sizing: border-box;
     width: 90vw;
     height: 90vh;
@@ -76,8 +84,16 @@ html {
   }
 
   &__scroll-watcher {
-    height: 500vh;
-    border: 1px solid green;
+    height: 800vh;
+  }
+
+  &__scroll-progress {
+    color: white;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+    font-size: 12px;
   }
 }
 </style>

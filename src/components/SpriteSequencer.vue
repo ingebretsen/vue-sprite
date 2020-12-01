@@ -125,7 +125,7 @@ export default {
     position: absolute;
     left: 0;
     top: 0;
-    border: 1px solid red;
+
     min-height: 100px;
     min-width: 100px;
   }
